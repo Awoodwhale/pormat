@@ -1,0 +1,5 @@
+name: pormat
+nested:
+  key: value
+  inner:
+    deep: data

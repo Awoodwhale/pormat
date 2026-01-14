@@ -1,0 +1,20 @@
+[project]
+name = "pormat"
+version = "0.1.0"
+description = "A CLI tool to format and convert data (JSON/YAML/TOML/Python) in the terminal"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "typer>=0.12.0",
+    "pyyaml>=6.0",
+    "tomli>=2.0",
+    "tomli-w>=1.0",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+pormat = "pormat:main"
+
+[build-system]
+requires = ["uv_build>=0.9.11,<0.10.0"]
+build-backend = "uv_build"

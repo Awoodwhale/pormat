@@ -1,0 +1,7 @@
+name = "pormat"
+
+[nested]
+key = "value"
+
+[nested.inner]
+deep = "data"
