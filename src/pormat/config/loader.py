@@ -20,9 +20,13 @@ class Config:
         self,
         format: FormatType = "json",
         indent: int = 4,
+        color: bool = True,
+        theme: str = "monokai",
     ):
         self.format = format
         self.indent = indent
+        self.color = color
+        self.theme = theme
 
     @classmethod
     def from_dict(cls, data: dict) -> "Config":
@@ -30,6 +34,8 @@ class Config:
         return cls(
             format=data.get("default_format", "json"),
             indent=data.get("default_indent", 4),
+            color=data.get("default_color", True),
+            theme=data.get("default_theme", "monokai"),
         )
 
 
@@ -122,6 +128,9 @@ def _load_env(path: Path) -> dict:
             # Convert indent to int
             elif config_key == "indent":
                 value = int(value)
+            # Convert color to bool
+            elif config_key == "color":
+                value = value.lower() in ("true", "1", "yes")
             config[f"default_{config_key}"] = value
     return config
 

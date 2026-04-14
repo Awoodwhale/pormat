@@ -92,6 +92,7 @@ name = "pormat"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "pygments" },
     { name = "python-dotenv", version = "1.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "python-dotenv", version = "1.2.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "pyyaml" },
@@ -104,6 +105,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "pygments", specifier = ">=2.14" },
     { name = "python-dotenv", specifier = ">=1.0" },
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "tomli", specifier = ">=2.0" },

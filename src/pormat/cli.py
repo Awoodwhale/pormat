@@ -1,5 +1,6 @@
 """CLI interface for pormat."""
 
+import sys
 from typing import Literal
 
 import typer
@@ -50,6 +51,12 @@ def main(
         False, "-C", "--compact", help="Output compact single-line format"
     ),
     config: str = typer.Option(None, "-c", "--config", help="Custom config file path"),
+    color: bool = typer.Option(
+        None, "--color/--no-color", help="Enable syntax highlighting (default: auto-detect TTY)"
+    ),
+    theme: str = typer.Option(
+        None, "-t", "--theme", help="Pygments color theme (default: monokai)"
+    ),
 ) -> None:
     """Format data from stdin or direct input.
 
@@ -61,6 +68,13 @@ def main(
     # Override with CLI arguments (CLI takes priority)
     output_format: FormatType = format if format else cfg.format
     output_indent = indent if indent is not None else cfg.indent
+    output_theme = theme if theme else cfg.theme
+
+    # Determine if color should be enabled
+    if color is None:
+        use_color = sys.stdout.isatty()
+    else:
+        use_color = color
 
     # Get input content
     try:
@@ -109,4 +123,7 @@ def main(
         raise typer.Exit(1)
 
     # Print result
+    if use_color:
+        from pormat.highlighter import highlight_output
+        output = highlight_output(output, output_format, theme=output_theme)
     typer.echo(output)
