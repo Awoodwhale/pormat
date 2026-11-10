@@ -125,5 +125,9 @@ def main(
     # Print result
     if use_color:
         from pormat.highlighter import highlight_output
-        output = highlight_output(output, output_format, theme=output_theme)
+        try:
+            output = highlight_output(output, output_format, theme=output_theme)
+        except Exception as exc:
+            typer.echo(f"Error: Unknown theme '{output_theme}': {exc}", err=True)
+            raise typer.Exit(1)
     typer.echo(output)
