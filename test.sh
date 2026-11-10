@@ -446,6 +446,10 @@ run_test_fail "Number to TOML (invalid for TOML)" \
     "echo '42' | uv run pormat -f toml" \
     "requires a dict/object"
 
+run_test_fail "Unknown theme should show error" \
+    "echo '{\"test\": 1}' | uv run pormat --color --theme no-such-theme" \
+    "Unknown theme"
+
 # ========================================
 # Group 12: Round-trip Tests
 # ========================================
